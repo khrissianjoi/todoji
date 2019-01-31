@@ -1,3 +1,3 @@
-CREATE DATABASE todoji
+CREATE DATABASE todoji;
 
 USE todoji;
