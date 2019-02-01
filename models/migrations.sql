@@ -19,6 +19,7 @@ CREATE TABLE users (
   name VARCHAR(150) NOT NULL,
   email VARCHAR(200) NOT NULL,
   password_hash VARCHAR(100) NOT NULL, -- bcrypt password hash
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  UNIQUE (email)
 ) CHARACTER SET = utf8;
 -- End of Migration 2

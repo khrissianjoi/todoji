@@ -3,10 +3,10 @@
   Routes traffic to controllers
 */
 const express = require('express');
-const hello_controller = require('../controllers/hello');
+const user_controller = require('../controllers/user');
 
 const router = express.Router();
 
-router.get('/hello', hello_controller);
+router.post('/user', user_controller.createUser);
 
 module.exports = router;

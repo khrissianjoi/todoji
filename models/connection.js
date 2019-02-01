@@ -35,7 +35,7 @@ pool.query = (...args) => {
       if (error) {
         reject(error);
       } else {
-        resolve({results: results.map(r => ({...r})), fields});
+        resolve({results, fields});
       }
     });
   });
