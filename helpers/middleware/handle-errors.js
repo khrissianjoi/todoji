@@ -11,6 +11,17 @@ module.exports = (error, req, res, next) => {
       error: error.message
     });
   } else if (error.code === 'ER_DUP_ENTRY') {
+    /*
+      When an error happens in one of the models, the error will be
+      thrown by pool.query(), and caught by whatever controller called it.
+      In our controllers, we have a try/catch block to catch errors thrown
+      by our models (or other failing code), and then the error is passed
+      to next(), forwarding it to this function.
+      Errors thrown by MySQL have a "code" property which we can use to tell
+      what kind of error it is. In this case, whenever a duplicate entry
+      happens in the database, MySQL will throw an ER_DUP_ENTRY error, and
+      we will respond with a status 409.
+    */
     res.status(409).json({
       error: 'Conflict in DB'
     });

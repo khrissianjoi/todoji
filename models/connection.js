@@ -10,7 +10,12 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  /* Default MySQL local server connection limit should be 100, but we leave
+  a few for connecting to it locally. */
   connectionLimit: 90,
+  /* When the connection limit is reached, the pool queues the following
+  queries, making them wait for another request to finish before theirs can
+  be processed. */
   queueLimit: 1000,
   waitForConnections: true,
 });
@@ -26,6 +31,9 @@ eg:
 becomes:
   const outcome = await pool.query('SHOW TABLES');
   console.log(outcome);
+
+The reason we are using promises or async/await is to make the
+asynchronous code read like synchronous, and avoid "callback hell"
 */
 pool.queryOriginal = pool.query;
 
