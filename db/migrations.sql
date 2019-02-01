@@ -11,3 +11,14 @@ CREATE DATABASE todoji;
 
 USE todoji;
 -- End of Migration 1
+
+
+-- Migration 2
+CREATE TABLE users (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  name VARCHAR(150) NOT NULL,
+  email VARCHAR(200) NOT NULL,
+  password_hash VARCHAR(100) NOT NULL, -- bcrypt password hash
+  PRIMARY KEY (id)
+) CHARACTER SET = utf8;
+-- End of Migration 2
