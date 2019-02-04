@@ -23,3 +23,13 @@ CREATE TABLE users (
   UNIQUE (email)
 ) CHARACTER SET = utf8;
 -- End of Migration 2
+
+-- Migration 3
+CREATE TABLE folders (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  name VARCHAR(150) NOT NULL,
+  user_id INTEGER NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id)
+    REFERENCES users(id)
+) CHARACTER SET = utf8;

@@ -14,6 +14,6 @@ app.use(bodyParser.json());
 app.use(routes);
 app.use(handle_errors);
 
-const PORT = 8080;
+const PORT = 8888;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

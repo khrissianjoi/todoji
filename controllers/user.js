@@ -16,12 +16,36 @@ module.exports = {
       // -> Validate request body
       const schema_errors = post_user_schema(req.body);
       if (schema_errors) {
-        throw http_errors(404, schema_errors);
+        throw http_errors(400, schema_errors);
       }
       // -> Call the model
       await user_model.createUser(req.body);
       // -> End the request responding with a status 200
       res.status(200).end();
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getUser(req, res, next) {
+    try {
+      const userId = parseInt(req.query.id, 10);
+      if (userId < 0) {
+        throw http_errors(400, 'invalid user id');
+      }
+      const user = await user_model.getUser(userId);
+      res.json(user);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getUsers(req, res, next) {
+    try {
+      const users = await user_model.getUsers();
+      res.json({
+        items: users
+      });
     } catch (error) {
       next(error);
     }

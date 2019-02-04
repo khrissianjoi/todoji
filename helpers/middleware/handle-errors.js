@@ -26,8 +26,9 @@ module.exports = (error, req, res, next) => {
       error: 'Conflict in DB'
     });
   } else {
+    console.log(error);
     res.status(500).json({
-      error: 'Unknown server error'
+      error: error
     });
   }
 };

@@ -2,11 +2,6 @@
   Everything to do with getting, creating, and updating users
   goes here.
 */
-const bcrypt = require('bcrypt');
-const db = require('../connection');
-
-module.exports = {
-  async createUser(user) {
     /*
       Hash the password so the hackers have a harder time
       When it comes time to determine if a plaintext password matches
@@ -42,6 +37,11 @@ module.exports = {
       });
 
     */
+const bcrypt = require('bcrypt');
+const db = require('../connection');
+
+module.exports = {
+  async createUser(user) {
     const password_hash = await bcrypt.hash(user.password, 10);
 
     await db.query(
@@ -51,5 +51,20 @@ module.exports = {
       (?, ?, ?)`,
       [user.name, user.email, password_hash]
     );
+  },
+
+  async getUser(userId) {
+    const tmp = await db.query(
+      'SELECT name, email FROM users WHERE id = ?',
+      [userId]
+    );
+    return tmp.results[0];
+  },
+
+  async getUsers() {
+    const users = await db.query(
+      'SELECT id, name, email FROM users',
+    );
+    return users.results;
   }
 }
