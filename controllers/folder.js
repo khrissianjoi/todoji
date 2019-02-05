@@ -40,5 +40,18 @@ module.exports = {
     } catch (error) {
       next(error);
     }
+  },
+
+  async deleteFolder(req, res, next) {
+    try {
+      const folderId = parseInt(req.query.id, 10);
+      if (folderId < 0) {
+        throw http_errors(400, 'invalid folder id')
+      }
+      await folder_model.deleteFolder(folderId);
+      res.status(200).end();
+    } catch (error) {
+      next(error);
+    }
   }
 };

@@ -19,4 +19,7 @@ router.post('/folder', folder_controller.createFolder);
 router.get('/folders', folder_controller.getFolders);
 
 router.get('/folder', folder_controller.getFolder);
+
+router.delete('/folder', folder_controller.deleteFolder);
+
 module.exports = router;

@@ -26,5 +26,11 @@ module.exports = {
       [folderId]
     );
     return folder.results[0];
+  },
+
+  async deleteFolder(folderId) {
+    await db.query(`DELETE FROM folders WHERE id = ?`,
+    [folderId]
+    );
   }
 }
