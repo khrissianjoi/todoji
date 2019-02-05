@@ -14,6 +14,8 @@ router.get('/user', user_controller.getUser);
 
 router.get('/users', user_controller.getUsers);
 
+router.delete('/user', user_controller.deleteUser);
+
 router.post('/folder', folder_controller.createFolder);
 
 router.get('/folders', folder_controller.getFolders);

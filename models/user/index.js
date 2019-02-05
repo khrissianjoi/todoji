@@ -66,5 +66,12 @@ module.exports = {
       'SELECT id, name, email FROM users',
     );
     return users.results;
+  },
+
+  async deleteUser(userId) {
+    await db.query(
+      `DELETE FROM users WHERE id = ?`,
+      [userId]
+    );
   }
 }

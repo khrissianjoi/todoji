@@ -49,5 +49,19 @@ module.exports = {
     } catch (error) {
       next(error);
     }
+  },
+
+  async deleteUser(req, res, next) {
+    try {
+      const userId = parseInt(req.query.id, 10);
+      await user_model.deleteUser(userId);
+      if (userId < 0) {
+        throw http_errors(400, 'invalid user id');
+      }
+      await user_model.deleteUser(userId);
+      res.status(200).end();
+    } catch (error) {
+      next(error);
+    }
   }
-};
+}
