@@ -14,9 +14,17 @@ module.exports = {
   
   async getFolders(userId) {
     const folders = await db.query(
-      `SELECT id, name, user_id FROM folders where user_id = ?`,
+      `SELECT id, name, user_id FROM folders WHERE user_id = ?`,
       [userId]
     );
     return folders.results;
+  },
+
+  async getFolder(folderId) {
+    const folder = await db.query(
+      `SELECT id, name, user_id FROM folders WHERE id = ?`,
+      [folderId]
+    );
+    return folder.results[0];
   }
 }

@@ -19,12 +19,24 @@ module.exports = {
   async getFolders(req, res, next) {
     try {
       const userId = parseInt(req.query.id, 10);
-      console.log(userId);
       if (userId < 0) {
         throw http_errors(400, 'invalid user id');
       }
       const folders = await folder_model.getFolders(userId);
       res.json({items :folders}); 
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getFolder(req, res, next) {
+    try {
+      const folderId = parseInt(req.query.id, 10);
+      if (folderId < 0) {
+        throw http_errors(400, 'invalid folder id')
+      }
+      const folder = await folder_model.getFolder(folderId);
+      res.json(folder);
     } catch (error) {
       next(error);
     }

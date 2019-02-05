@@ -17,5 +17,6 @@ router.get('/users', user_controller.getUsers);
 router.post('/folder', folder_controller.createFolder);
 
 router.get('/folders', folder_controller.getFolders);
-  
+
+router.get('/folder', folder_controller.getFolder);
 module.exports = router;
