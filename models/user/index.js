@@ -73,5 +73,17 @@ module.exports = {
       `DELETE FROM users WHERE id = ?`,
       [userId]
     );
+  },
+
+  async patchUser(user, userId) {
+    if ('password' in user) {
+      const new_password_hash = await bcrypt.hash(user.password, 10);
+      user.password_hash = new_password_hash
+      delete user.password
+    }
+    await db.query(
+    `UPDATE users SET ? WHERE id = ?`,
+    [user, userId]
+    );
   }
 }
