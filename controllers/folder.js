@@ -1,6 +1,7 @@
 const http_errors = require('http-errors');
 const post_folder_schema = require('../helpers/validators/post-folder');
-const folder_model = require('../models/folder')
+const patch_folder_schema = require('../helpers/validators/patch-folder');
+const folder_model = require('../models/folder');
 
 module.exports = {
   async createFolder(req, res, next) {
@@ -49,6 +50,24 @@ module.exports = {
         throw http_errors(400, 'invalid folder id')
       }
       await folder_model.deleteFolder(folderId);
+      res.status(200).end();
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async patchFolder(req, res, next) {
+    try {
+      const folderName = req.body
+      const schema_errors = patch_folder_schema(folderName);
+      if (schema_errors) {
+        throw http_errors(400, schema_errors);
+      }
+      const folderId = parseInt(req.query.id, 10);
+      if (folderId < 0) {
+        throw http_errors(400, 'invalid folder id')
+      }
+      await folder_model.patchFolder(folderName, folderId);
       res.status(200).end();
     } catch (error) {
       next(error);

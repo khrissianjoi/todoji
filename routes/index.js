@@ -26,4 +26,6 @@ router.get('/folder', folder_controller.getFolder);
 
 router.delete('/folder', folder_controller.deleteFolder);
 
+router.patch('/folder', folder_controller.patchFolder);
+
 module.exports = router;

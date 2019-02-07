@@ -32,5 +32,11 @@ module.exports = {
     await db.query(`DELETE FROM folders WHERE id = ?`,
     [folderId]
     );
-  }
+  },
+
+  async patchFolder(folderName, folderId) {
+    await db.query(`UPDATE folders SET ? WHERE id = ?`,
+    [folderName, folderId]
+    );
+  } 
 }
