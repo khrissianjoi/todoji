@@ -4,7 +4,8 @@
 */
 const express = require('express');
 const user_controller = require('../controllers/user');
-const folder_controller = require('../controllers/folder')
+const folder_controller = require('../controllers/folder');
+const task_controller = require('../controllers/task')
 
 const router = express.Router();
 
@@ -27,5 +28,13 @@ router.get('/folder', folder_controller.getFolder);
 router.delete('/folder', folder_controller.deleteFolder);
 
 router.patch('/folder', folder_controller.patchFolder);
+
+router.post('/task', task_controller.postTask);
+
+router.get('/tasks', task_controller.getTasks);
+
+router.get('/task', task_controller.getTask);
+
+router.get('/tasks', task_controller.getTask_UserFolder);
 
 module.exports = router;

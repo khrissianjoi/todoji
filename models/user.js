@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const db = require('../connection');
+const db = require('../helpers/connection');
 
 module.exports = {
   async createUser(user) {
