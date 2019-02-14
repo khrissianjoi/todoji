@@ -15,11 +15,11 @@ module.exports = {
     );
   },
 
-	async getTasks(folderId) {
+	async getTasks(userId) {
 		const tasks = await db.query(
 			`SELECT id, title, due_date, description, status, folder_id, user_id
-			FROM tasks WHERE folder_id = ?`,
-			[folderId]
+			FROM tasks WHERE user_id = ?`,
+			[userId]
 		);
 		return tasks.results;
 	},

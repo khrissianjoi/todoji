@@ -19,20 +19,33 @@ module.exports = {
 
   async getTasks(req, res, next) {
     try {
-      const folderId = parseInt(req.query.id, 10);
-      if (folderId < 0) {
-        throw http_errors(400, 'invalid folder id');
+      if ('folder_id' in req.query)
+      {
+        const user_id = parseInt(req.query.user_id, 10);
+        const folder_id = parseInt(req.query.folder_id, 10);
+        if (folder_id < 0 || user_id < 0) {
+        throw http_errors(400, 'invalid user id or folder id');
+        }
+        const tasks = await task_model.getTask_UserFolder(user_id, folder_id);
+        res.json(tasks);
       }
-      const tasks = await task_model.getTasks(folderId);
-      res.json({
-        items : tasks
-      });
+      else {
+        const userId = parseInt(req.query.id, 10);
+        if (userId < 0) {
+          throw http_errors(400, 'invalid folder id');
+        }
+        const tasks = await task_model.getTasks(userId);
+        res.json({
+          items : tasks
+        });
+      }
     } catch (error) {
       next(error);
     }
   },
   async getTask(req, res, next) {
     try {
+ 
       const taskId = parseInt(req.query.id, 10);
       if (taskId < 0) {
         throw http_errors(400, 'invalid task id');
