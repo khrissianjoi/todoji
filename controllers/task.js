@@ -55,22 +55,6 @@ module.exports = {
     } catch (error) {
       next(error);
     }
-  },
-
-  async getTask_UserFolder(req, res, next) {
-    console.log(req.query);
-    try {
-      const user_id = parsetInt(req.query.user_id, 10);
-      const folder_id = parseInt(req.query.folder_id, 10);
-      console.log(user_id, folder_id);
-      if (task_id < 0 || user_id < 0) {
-        throw http_errors(400, 'invalid user id or folder id');
-      }
-      const tasks = await task_model.getTask_UserFolder(user_id, folder_id);
-      res.json(tasks);
-    } catch (error) {
-      next(error);
-    }
   }
 };
 	

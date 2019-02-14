@@ -35,6 +35,4 @@ router.get('/tasks', task_controller.getTasks);
 
 router.get('/task', task_controller.getTask);
 
-router.get('/tasks', task_controller.getTask_UserFolder);
-
 module.exports = router;
