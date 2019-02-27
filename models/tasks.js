@@ -40,5 +40,11 @@ module.exports = {
 			[userId, folderId]
 		);
 		return tasks.results;
+	},
+
+	async deleteTask(taskId) {
+		await db.query(`DELETE from tasks WHERE id = ?`,
+		[taskId]
+		);	
 	}
 };

@@ -27,18 +27,16 @@ module.exports = {
         throw http_errors(400, 'invalid user id or folder id');
         }
         const tasks = await task_model.getTask_UserFolder(user_id, folder_id);
-        res.json(tasks);
       }
       else {
         const userId = parseInt(req.query.id, 10);
         if (userId < 0) {
-          throw http_errors(400, 'invalid folder id');
+          throw http_errors(400, 'invalid user id');
         }
-        const tasks = await task_model.getTasks(userId);
-        res.json({
-          items : tasks
-        });
+        const task = await task_model.getTasks(userId);
+        const tasks = {items : task};
       }
+      res.json(tasks);
     } catch (error) {
       next(error);
     }
@@ -53,6 +51,19 @@ module.exports = {
       const task = await task_model.getTask(taskId);
       res.json(task);
     } catch (error) {
+      next(error);
+    }
+  },
+
+  async deleteTask(req, res, next) {
+    try {
+      const taskId = parseInt(req.query.id, 10);
+      if (taskId < 0) {
+        throw http_errors(400, 'invalid task id');
+      }
+      await task_model.deleteTask(taskId);
+      res.status(200).end();
+    } catch(error) {
       next(error);
     }
   }
