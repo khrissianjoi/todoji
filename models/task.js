@@ -46,5 +46,12 @@ module.exports = {
 		await db.query(`DELETE from tasks WHERE id = ?`,
 		[taskId]
 		);	
+	},
+
+	async patchTask(task, taskId) {
+		await db.query(
+			`UPDATE tasks SET ? WHERE id = ?`,
+			[task, taskId]
+		)
 	}
 };

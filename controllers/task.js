@@ -1,7 +1,7 @@
 const http_errors = require('http-errors');
 const post_task_schema = require('../helpers/validators/post-task');
-// const patch_folder_schema = require('../helpers/validators/patch-files');
-const task_model = require('../models/tasks');
+const patch_task_schema = require('../helpers/validators/patch-task');
+const task_model = require('../models/task');
 
 module.exports = {
   async postTask(req, res, next) {
@@ -61,7 +61,24 @@ module.exports = {
       if (taskId < 0) {
         throw http_errors(400, 'invalid task id');
       }
-      await task_model.deleteTask(taskId);
+      await task_model.deleteTask(req.body, taskId);
+      res.status(200).end();
+    } catch(error) {
+      next(error);
+    }
+  },
+
+  async patchTask(req,res, next) {
+    try {
+      const schema_errors = patch_task_schema(req.body);
+      if (schema_errors) {
+        throw http_errors(400, schema_errors);
+      }
+      const taskId = parseInt(req.query.id, 10);
+      if (taskId < 0) {
+        throw http_errors(400, 'invalid task id');
+      }
+      await task_model.patchTask(req.body, taskId);
       res.status(200).end();
     } catch(error) {
       next(error);

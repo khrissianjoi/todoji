@@ -37,4 +37,7 @@ router.get('/task', task_controller.getTask);
 
 router.delete('/task', task_controller.deleteTask);
 
+router.patch('/task', task_controller.patchTask);
+
+
 module.exports = router;
