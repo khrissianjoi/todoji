@@ -19,7 +19,6 @@ module.exports = {
 
   async getTasks(req, res, next) {
     try {
-<<<<<<< HEAD
       if ('folder_id' in req.query)
       {
         const user_id = parseInt(req.query.user_id, 10);
@@ -28,37 +27,34 @@ module.exports = {
         throw http_errors(400, 'invalid user id or folder id');
         }
         const tasks = await task_model.getTask_UserFolder(user_id, folder_id);
+        res.json(tasks);
       }
       else {
-        const userId = parseInt(req.query.id, 10);
+        const userId = parseInt(req.query.user_id, 10);
         if (userId < 0) {
           throw http_errors(400, 'invalid user id');
         }
         const task = await task_model.getTasks(userId);
         const tasks = {items : task};
-      }
-      res.json(tasks);
-=======
-      const user_id = parseInt(req.query.user_id, 10);
-      const folder_id = parseInt(req.query.folder_id, 10);
-      if (userId < 0) {
-        throw http_errors(400, 'invalid user id');
+        res.json(tasks);
       }
 
-      let tasks;
-      if (req.query.folder_id) {
-        if (folder_id < 0) {
-          throw http_errors(400, 'invalid  folder id');
-        }
-        tasks = await task_model.getTask_UserFolder(user_id, folder_id);
-      } else {
-        tasks = await task_model.getTasks(userId);
-      }
+      // const user_id = parseInt(req.query.user_id, 10);
+      // const folder_id = parseInt(req.query.folder_id, 10);
+      // if (userId < 0) {
+      //   throw http_errors(400, 'invalid user id');
+      // }
 
-      res.json({
-        items: tasks,
-      });
->>>>>>> 2229812a76c0dca507e673862dde1d4ee7b3471e
+      // let tasks;
+      // if (req.query.folder_id) {
+      //   if (folder_id < 0) {
+      //     throw http_errors(400, 'invalid  folder id');
+      //   }
+      //   tasks = await task_model.getTask_UserFolder(user_id, folder_id);
+      // } else {
+      //   tasks = await task_model.getTasks(userId);
+      // }
+
     } catch (error) {
       next(error);
     }
@@ -75,7 +71,6 @@ module.exports = {
       next(error);
     }
   },
-<<<<<<< HEAD
 
   async deleteTask(req, res, next) {
     try {
@@ -106,6 +101,4 @@ module.exports = {
       next(error);
     }
   }
-=======
->>>>>>> 2229812a76c0dca507e673862dde1d4ee7b3471e
 };

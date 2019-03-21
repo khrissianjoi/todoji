@@ -6,6 +6,7 @@ const express = require('express');
 const user_controller = require('../controllers/user');
 const folder_controller = require('../controllers/folder');
 const task_controller = require('../controllers/task')
+const note_controller = require('../controllers/note')
 
 const router = express.Router();
 
@@ -39,5 +40,14 @@ router.delete('/task', task_controller.deleteTask);
 
 router.patch('/task', task_controller.patchTask);
 
+router.post('/note', note_controller.postNote);
+
+router.get('/notes', note_controller.getNotes);
+
+router.get('/note', note_controller.getNote);
+
+router.delete('/note', note_controller.deleteNote);
+
+router.patch('/note', note_controller.patchNote);
 
 module.exports = router;

@@ -51,3 +51,18 @@ CREATE TABLE tasks (
     REFERENCES users(id)
 ) CHARACTER SET = utf8;
 -- End of Migration 4
+
+CREATE TABLE notes (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  title VARCHAR(150) NOT NULL,
+  description TEXT(750) NOT NULL,
+  content LONGTEXT NOT NULL,
+  folder_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (folder_id)
+    REFERENCES folders(id),
+  FOREIGN KEY (user_id)
+    REFERENCES users(id)
+) CHARACTER SET = utf8;
+-- End of Migration 5
