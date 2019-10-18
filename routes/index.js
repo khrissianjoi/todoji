@@ -10,6 +10,7 @@ const note_controller = require('../controllers/note')
 
 const router = express.Router();
 
+// User endpoint
 router.post('/user', user_controller.createUser);
 
 router.get('/user', user_controller.getUser);
@@ -20,6 +21,7 @@ router.delete('/user', user_controller.deleteUser);
 
 router.patch('/user', user_controller.patchUser);
 
+// Folder endpoint
 router.post('/folder', folder_controller.createFolder);
 
 router.get('/folders', folder_controller.getFolders);
@@ -30,6 +32,7 @@ router.delete('/folder', folder_controller.deleteFolder);
 
 router.patch('/folder', folder_controller.patchFolder);
 
+// Task endpoint
 router.post('/task', task_controller.postTask);
 
 router.get('/tasks', task_controller.getTasks);
@@ -40,6 +43,7 @@ router.delete('/task', task_controller.deleteTask);
 
 router.patch('/task', task_controller.patchTask);
 
+// Note endpoint
 router.post('/note', note_controller.postNote);
 
 router.get('/notes', note_controller.getNotes);
