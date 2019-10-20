@@ -1,4 +1,4 @@
-const Ajv = require('ajv');
+const Ajv = require('ajv'); /*schema validator*/
 const ajv = new Ajv({ allErrors: true });
 
 const schema = ajv.compile({
