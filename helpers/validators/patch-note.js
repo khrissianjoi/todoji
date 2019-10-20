@@ -1,4 +1,4 @@
-const Ajv = require('ajv'); /*schema validation*/
+const Ajv = require('ajv'); /*schema validator*/
 const ajv = new Ajv({ allErrors: true });
 
 
