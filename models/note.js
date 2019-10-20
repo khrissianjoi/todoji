@@ -2,9 +2,7 @@ const bcrypt = require('bcrypt');
 const db = require('../helpers/connection');
 
 module.exports = {
-  async createNote(note) {/*  */
-		// const new_due_date = file.due_date.replace('T', ' ');
-		// const due_date = new_due_date.slice(0,-1);
+  async createNote(note) {
 		await db.query(
 			`INSERT INTO notes
 			(title, description, content, folder_id, user_id)

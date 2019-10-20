@@ -2,9 +2,7 @@ const bcrypt = require('bcrypt');
 const db = require('../helpers/connection');
 
 module.exports = {
-  async createTask(task) {/*  */
-		// const new_due_date = file.due_date.replace('T', ' ');
-		// const due_date = new_due_date.slice(0,-1);
+  async createTask(task) {
 		const due_date = new Date(task.due_date);
 		await db.query(
 			`INSERT INTO tasks
