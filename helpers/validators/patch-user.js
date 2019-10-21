@@ -27,11 +27,6 @@ const schema = ajv.compile({
 });
 
 module.exports = (obj) => {
-  /*
-    Checks if the object passed matches the schema above,
-    if errors occur, it returns a string with the errors.
-    otherwise, it returns an empty string.
-  */
   schema(obj);
   return schema.errors ? ajv.errorsText(schema.errors) : '';
 };
